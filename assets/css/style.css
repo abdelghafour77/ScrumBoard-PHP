@@ -1,0 +1,105 @@
+:root {
+    --bg-color: #212121;
+    --card-color: #2e2e2e;
+    /* --header-color: #272727; */
+    --header-color: #4e4e4e;
+    /* --header-color: #121212; */
+    --blue-color: #5680E9;
+    --violet-color: #ba86fc;
+    --hover-color: #474747;
+    --yellow-color: #ECD06F;
+    --violet-color: #ba86fc;
+    /* --bg-color: #EDC7B7;
+    --white-color: #EEE2DC;
+    --grey-color: #BAB2B5;
+    --blue-color: #123C69;
+    --violet-color: #AC3B61;
+    --yellow-color: #ECD06F;
+    --violet-color: #7E78D2; */
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    /* font-size: 2rem; */
+    /* font-weight: bold; */
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.navbar-brand {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.btn-scroll-to-top {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    cursor: pointer;
+}
+
+.pace {
+    display: none;
+}
+
+.main-style {
+    background-color: var(--bg-color);
+}
+
+.app-content {
+    background-color: var(--bg-color);
+    min-height: 90vh;
+    background: url(../img/cover/cover.png) no-repeat fixed;
+    background-size: 360px;
+    background-position: right bottom;
+}
+
+.title-board {
+    color: var(--violet-color);
+}
+
+.title {
+    color: #c9d1d9;
+}
+
+.bread {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-color {
+    background-color: var(--header-color) !important;
+}
+
+.btn-add-task {
+    background-color: var(--violet-color) !important;
+    --bs-btn-border-color: none;
+}
+
+.card {
+    --bs-card-border-color: none !important;
+}
+
+.card-color {
+    background-color: var(--card-color);
+    color: aliceblue;
+}
+
+.card-color:hover {
+    background-color: var(--hover-color);
+    transition: .3s;
+}
+
+.blue-color {
+    background-color: #5692EC;
+    margin-right: .4rem;
+}
+
+.fa-spinner {
+    color: var(--blue-color);
+}
+
+.list-group-item {
+    text-align: left !important;
+}

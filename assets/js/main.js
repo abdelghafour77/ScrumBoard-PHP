@@ -29,19 +29,6 @@ function addTask() {
   // Check if all input are valid
   if (document.getElementById("form").checkValidity()) {
 
-    // Create object of task & get all data 
-    let task = {
-      title: document.getElementById("title").value,
-      type: document.querySelector('input[name="type"]:checked').value,
-      priority: document.getElementById('priority').value,
-      status: document.getElementById('status').value,
-      date: document.getElementById("date").value,
-      description: document.getElementById("description").value
-    };
-
-    // Add task to array of tasks
-    allTasks.push(task);
-
     // Hide form
     $("#myModal").modal('hide');
 
@@ -59,20 +46,6 @@ function addTask() {
 // Get all data from array fo tasks using indes of task
 function getTask(id) {
 
-  // Set value for all inputs 
-  if (allTasks[id].type == "Bug") {
-    document.getElementById("bug").checked = true
-  } else {
-    document.getElementById("feature").checked = true
-  }
-  document.getElementById("title").value = allTasks[id].title;
-  document.querySelector('input[name="type"]:checked').value = allTasks[id].type;
-  document.getElementById('priority').value = allTasks[id].priority;
-  document.getElementById('status').value = allTasks[id].status;
-  document.getElementById("date").value = allTasks[id].date;
-  document.getElementById("description").value = allTasks[id].description;
-  document.getElementById("id").value = id;
-
   // Hide add button from modal
   document.getElementById("btn-update").style.display = "block";
 
@@ -89,34 +62,12 @@ function updateTask() {
   // Hide form
   $("#myModal").modal('hide');
 
-  // Get index of task from hidden input
-  let id = document.getElementById("id").value;
-
-  // Create object of task
-  let task = {
-    title: document.getElementById("title").value,
-    type: document.querySelector('input[name="type"]:checked').value,
-    priority: document.getElementById('priority').value,
-    status: document.getElementById('status').value,
-    date: document.getElementById("date").value,
-    description: document.getElementById("description").value
-  };
-
-  // Replace old task by new one 
-  allTasks[id] = task;
-
   // Print all tasks
   printTasks();
 }
 
 // Delete task
 function deleteTask() {
-
-  // Get index of task from hidden input
-  let id = document.getElementById("id").value;
-
-  // Remove task from tasks
-  allTasks.splice(id, 1);
 
   //Hide modal
   $("#myModal").modal('hide');
@@ -177,4 +128,4 @@ function printTasks() {
   document.getElementById("count-done").innerText = counter_done;
 
 }
-printTasks();
+// printTasks();

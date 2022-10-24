@@ -1,3 +1,9 @@
+<?php
+require_once 'core.php';
+ $sql="select * from task;";  
+ $tasks=$conn->query($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,11 +61,36 @@
 
       <div id="content" class="app-content container-fluid">
         <div class="row" id="all-tasks">
+          
           <!-- TODO -->
           <div class="col-md-4 col-sm-12 mb-3">
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">To Do (<span id="count-todo">0</span>)</div>
-              <div class="list-group list-group-flush" id="toDo"></div>
+              <div class="list-group list-group-flush" id="toDo">
+              <?php while ( $task = $tasks -> fetch_row()){ 
+                if($task[4]==='To Do'){?>
+                 <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
+                  data-bs-target="#myModal">
+                      <div class="row">
+                      
+                      <div class="col-1 my-auto">
+                          <i class="fa-solid ${icon}"></i>
+                      </div>
+                      <div class="col-11">
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
+                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
+                              <?php echo $task[6] ; ?>
+                          </div>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                      </div>
+                      </div>
+                  </button>
+               <?php
+                }
+              }?>
+              </div>
             </div>
           </div>
           <!-- END TO DO -->
@@ -67,7 +98,31 @@
           <div class="col-md-4 col-sm-12 mb-3">
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">In Progress (<span id="count-in-progress">0</span>)</div>
-              <div class="list-group list-group-flush" id="inProgress"></div>
+              <div class="list-group list-group-flush" id="inProgress">
+              <?php while ( $task = $tasks -> fetch_row()){ 
+                if($task[4]==='In Progress'){?>
+                 <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
+                  data-bs-target="#myModal">
+                      <div class="row">
+                      
+                      <div class="col-1 my-auto">
+                          <i class="fa-solid ${icon}"></i>
+                      </div>
+                      <div class="col-11">
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
+                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
+                              <?php echo $task[6] ; ?>
+                          </div>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                      </div>
+                      </div>
+                  </button>
+               <?php
+                }
+              }?>
+              </div>
             </div>
           </div>
           <!-- END IN PROGRESS -->
@@ -75,7 +130,31 @@
           <div class="col-md-4 col-sm-12 mb-3">
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">Done (<span id="count-done">0</span>)</div>
-              <div class="list-group list-group-flush" id="done"></div>
+              <div class="list-group list-group-flush" id="done">
+              <?php while ( $task = $tasks -> fetch_row()){ 
+                if($task[4]==='Done'){?>
+                 <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
+                  data-bs-target="#myModal">
+                      <div class="row">
+                      
+                      <div class="col-1 my-auto">
+                          <i class="fa-solid ${icon}"></i>
+                      </div>
+                      <div class="col-11">
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
+                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
+                              <?php echo $task[6] ; ?>
+                          </div>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                      </div>
+                      </div>
+                  </button>
+               <?php
+                }
+              }?>
+              </div>
             </div>
           </div>
           <!-- END DONE -->
@@ -97,7 +176,7 @@
             <div class="modal-body">
               <!-- start form -->
               <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="title" placeholder="Title" />
+                <input type="text" class="form-control" name="title" id="title" placeholder="Title" />
                 <label for="title">Title</label>
               </div>
               <div class="mb-3">
@@ -112,7 +191,7 @@
                 </div>
               </div>
               <div class="form-floating mb-3">
-                <select class="form-select" id="priority" aria-describedby="basic-addon3" required>
+                <select class="form-select" id="priority" name="priority" aria-describedby="basic-addon3" required>
                   <option disabled selected>Selected</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
@@ -122,7 +201,7 @@
                 <label for="priority" class="form-label">Priority</label>
               </div>
               <div class="form-floating mb-3">
-                <select class="form-select" id="status" aria-label="Status" aria-describedby="basic-addon3" required>
+                <select class="form-select" id="status" name="status" aria-label="Status" aria-describedby="basic-addon3" required>
                   <option disabled selected>Selected</option>
                   <option value="To Do">To do</option>
                   <option value="In Progress">In progress</option>
@@ -135,7 +214,7 @@
                 <label for="date" class="form-label">Date</label>
               </div>
               <div class="form-floating mb-3">
-                <textarea class="form-control" id="description" rows="4" placeholder="Description" required></textarea>
+                <textarea class="form-control" name="description" id="description" rows="4" placeholder="Description" required></textarea>
                 <label for="description" class="form-label">Description</label>
               </div>
               <!-- end form -->
@@ -143,7 +222,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <div id="btn-add">
-                <button type="submit" onclick="addTask()" class="btn btn-primary btn-add-task">Add</button>
+                <button type="submit" onclick="addTask()" name="add" class="btn btn-primary btn-add-task">Add</button>
               </div>
               <input type="hidden" id="id" value="" />
               <div id="btn-update" style="display: none">

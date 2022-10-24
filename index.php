@@ -58,17 +58,16 @@ require_once 'core.php';
           <h2 class="title-board">Scrum Board</h2>
         </div>
       </header>
-
       <div id="content" class="app-content container-fluid">
         <div class="row" id="all-tasks">
-          
+
           <!-- TODO -->
           <div class="col-md-4 col-sm-12 mb-3">
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">To Do (<span id="count-todo">0</span>)</div>
               <div class="list-group list-group-flush" id="toDo">
-              <?php while ( $task = $tasks -> fetch_row()){ 
-                if($task[4]==='To Do'){?>
+              <?php foreach ( $tasks as $key => $task){ 
+                if($task['status']==='To Do'){?>
                  <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
                   data-bs-target="#myModal">
                       <div class="row">
@@ -77,13 +76,13 @@ require_once 'core.php';
                           <i class="fa-solid ${icon}"></i>
                       </div>
                       <div class="col-11">
-                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
-                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
-                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
-                              <?php echo $task[6] ; ?>
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task['title'] ; ?></p>
+                      <small class="fw-light text-muted">#<?php echo $key+1 ; ?> created in <?php echo $task['date'] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task['description'] ; ?>">
+                              <?php echo $task['description'] ; ?>
                           </div>
-                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
-                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task['priority'] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task['type'] ; ?></span>
                       </div>
                       </div>
                   </button>
@@ -99,8 +98,10 @@ require_once 'core.php';
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">In Progress (<span id="count-in-progress">0</span>)</div>
               <div class="list-group list-group-flush" id="inProgress">
-              <?php while ( $task = $tasks -> fetch_row()){ 
-                if($task[4]==='In Progress'){?>
+                
+
+              <?php foreach ( $tasks as $key => $task){ 
+                if($task['status']==='In Progress'){?>
                  <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
                   data-bs-target="#myModal">
                       <div class="row">
@@ -109,13 +110,13 @@ require_once 'core.php';
                           <i class="fa-solid ${icon}"></i>
                       </div>
                       <div class="col-11">
-                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
-                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
-                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
-                              <?php echo $task[6] ; ?>
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task['title'] ; ?></p>
+                      <small class="fw-light text-muted">#<?php echo $key+1 ; ?> created in <?php echo $task['date'] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task['description'] ; ?>">
+                              <?php echo $task['description'] ; ?>
                           </div>
-                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
-                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task['priority'] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task['type'] ; ?></span>
                       </div>
                       </div>
                   </button>
@@ -131,8 +132,8 @@ require_once 'core.php';
             <div class="card">
               <div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">Done (<span id="count-done">0</span>)</div>
               <div class="list-group list-group-flush" id="done">
-              <?php while ( $task = $tasks -> fetch_row()){ 
-                if($task[4]==='Done'){?>
+              <?php foreach ( $tasks as $key => $task){ 
+                if($task['status']==='Done'){?>
                  <button onclick="getTask()" class="list-group-item card-color" data-bs-toggle="modal"
                   data-bs-target="#myModal">
                       <div class="row">
@@ -141,13 +142,13 @@ require_once 'core.php';
                           <i class="fa-solid ${icon}"></i>
                       </div>
                       <div class="col-11">
-                      <p class="fs-6 fw-semibold title m-0"><?php echo $task[1] ; ?></p>
-                      <small class="fw-light text-muted">#1 created in <?php echo $task[5] ; ?></small>
-                          <div class="text-truncate text-break" title="<?php echo $task[6] ; ?>">
-                              <?php echo $task[6] ; ?>
+                      <p class="fs-6 fw-semibold title m-0"><?php echo $task['title'] ; ?></p>
+                      <small class="fw-light text-muted">#<?php echo $key+1 ; ?> created in <?php echo $task['date'] ; ?></small>
+                          <div class="text-truncate text-break" title="<?php echo $task['description'] ; ?>">
+                              <?php echo $task['description'] ; ?>
                           </div>
-                          <span class="badge rounded-pill text-white blue-color"><?php echo $task[3] ; ?></span>
-                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task[2] ; ?></span>
+                          <span class="badge rounded-pill text-white blue-color"><?php echo $task['priority'] ; ?></span>
+                          <span class="badge rounded-pill text-bg-secondary"><?php echo $task['type'] ; ?></span>
                       </div>
                       </div>
                   </button>

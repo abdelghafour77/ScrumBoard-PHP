@@ -9,6 +9,7 @@
     --hover-color: #474747;
     --yellow-color: #ECD06F;
     --violet-color: #ba86fc;
+    --white-color: #fafafa;
     /* --bg-color: #EDC7B7;
     --white-color: #EEE2DC;
     --grey-color: #BAB2B5;
@@ -103,3 +104,30 @@
 .list-group-item {
     text-align: left !important;
 }
+
+.modal-content {
+    background-color: var(--card-color);
+    color: var(--white-color);
+}
+
+.form-select {
+    background-color: var(--header-color);
+    color: var(--white-color);
+    border-color: var(--violet-color);
+}
+
+.form-control {
+    background-color: var(--header-color);
+    color: var(--white-color);
+    border-color: var(--violet-color);
+}
+
+.form-check-input {
+    background-color: var(--header-color);
+    color: var(--white-color);
+    border-color: var(--violet-color);
+}
+
+/* .modal-header {
+    background-color: var(--header-color);
+} */

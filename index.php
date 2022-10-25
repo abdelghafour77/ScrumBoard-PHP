@@ -54,7 +54,7 @@ include('scripts.php');
 
 		<div id="content" class="app-content container-fluid">
 			<?php if (isset($_SESSION['message'])) : ?>
-				<div class="alert alert-green alert-dismissible fade show">
+				<div class="alert alert-success alert-dismissible fade show">
 					<strong>Success!</strong>
 					<?php
 					echo $_SESSION['message'];
@@ -70,22 +70,27 @@ include('scripts.php');
 				$counter_todo = 0;
 				$counter_inprogress = 0;
 				$counter_done = 0;
-				foreach ($res as $key => $row) {
+
 				?>
-					<div class="col-md-4 col-sm-12 mb-3">
-						<div class="card">
-							<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-								To Do (
-								<span id="count-todo">
-									<?php if ($row['status'] == 'To Do') {
+				<div class="col-md-4 col-sm-12 mb-3">
+					<div class="card">
+						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
+							To Do (
+							<span id="count-todo">
+								<?php
+
+								foreach ($res as $row) {
+									if ($row['status'] == 'To Do') {
 										$counter_todo++;
 									}
-									echo $counter_todo;
-									?>
-								</span>)
-							</div>
-							<div class="list-group list-group-flush" id="toDo">
-								<?php
+								}
+								echo $counter_todo;
+								?>
+							</span>)
+						</div>
+						<div class="list-group list-group-flush" id="toDo">
+							<?php
+							foreach ($res as $key => $row) {
 								if ($row['status'] == 'To Do') { ?>
 									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
 										<div class="row">
@@ -104,26 +109,31 @@ include('scripts.php');
 											</div>
 										</div>
 									</button>
-								<?php
+							<?php
 								}
-								?>
-							</div>
+							}
+							?>
 						</div>
 					</div>
-					<!-- END TO DO -->
-					<!-- In Progress -->
-					<div class="col-md-4 col-sm-12 mb-3">
-						<div class="card">
-							<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-								In Progress (<span id="count-in-progress">
-									<?php if ($row['status'] == 'In Progress') {
+				</div>
+				<!-- END TO DO -->
+				<!-- In Progress -->
+				<div class="col-md-4 col-sm-12 mb-3">
+					<div class="card">
+						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
+							In Progress (<span id="count-in-progress">
+								<?php
+								foreach ($res as $key => $row) {
+									if ($row['status'] == 'In Progress') {
 										$counter_inprogress++;
 									}
-									echo $counter_inprogress;
-									?>
-								</span>)</div>
-							<div class="list-group list-group-flush" id="inProgress">
-								<?php
+								}
+								echo $counter_inprogress;
+								?>
+							</span>)</div>
+						<div class="list-group list-group-flush" id="inProgress">
+							<?php
+							foreach ($res as $key => $row) {
 								if ($row['status'] == 'In Progress') { ?>
 									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
 										<div class="row">
@@ -142,26 +152,31 @@ include('scripts.php');
 											</div>
 										</div>
 									</button>
-								<?php
+							<?php
 								}
-								?>
-							</div>
+							}
+							?>
 						</div>
 					</div>
-					<!-- END IN PROGRESS -->
-					<!-- DONE -->
-					<div class="col-md-4 col-sm-12 mb-3">
-						<div class="card">
-							<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-								Done (<span id="count-done">
-									<?php if ($row['status'] == 'Done') {
+				</div>
+				<!-- END IN PROGRESS -->
+				<!-- DONE -->
+				<div class="col-md-4 col-sm-12 mb-3">
+					<div class="card">
+						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
+							Done (<span id="count-done">
+								<?php
+								foreach ($res as $row) {
+									if ($row['status'] == 'Done') {
 										$counter_done++;
 									}
-									echo $counter_done;
-									?>
-								</span>)</div>
-							<div class="list-group list-group-flush" id="done">
-								<?php
+								}
+								echo $counter_done;
+								?>
+							</span>)</div>
+						<div class="list-group list-group-flush" id="done">
+							<?php
+							foreach ($res as $row) {
 								if ($row['status'] == 'Done') { ?>
 									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
 										<div class="row">
@@ -180,13 +195,13 @@ include('scripts.php');
 											</div>
 										</div>
 									</button>
-								<?php
+							<?php
 								}
-								?>
-							</div>
+							}
+							?>
 						</div>
 					</div>
-				<?php } ?>
+				</div>
 				<!-- END DONE -->
 			</div>
 		</div>

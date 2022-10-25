@@ -41,14 +41,16 @@ function saveTask()
 {
     //CODE HERE
     //SQL INSERT
+
     extract($_POST);
     global $conn;
     $sql = "INSERT INTO tasks (title, type_id, status_id, priority_id, task_datetime , description)
-            values ($title, $type, $status, $priority, $date,$description)";
+            values ('$title', '$type', '$status', '$priority', '$date','$description')";
     $res = $conn->query($sql);
-
-    $_SESSION['message'] = "Task has been added successfully !";
-    header('location: index.php');
+    if ($res) {
+        $_SESSION['message'] = "Task has been added successfully !";
+        header('location: index.php');
+    }
 }
 
 function updateTask()

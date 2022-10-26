@@ -83,23 +83,23 @@ include('scripts.php');
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
 							foreach ($toDo as $key => $row) { ?>
-								<a class="list-group-item card-color" href="index.php?id=<?= $row["id"] ?>">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
 											<i class="fa-solid d-flex bi bi-clock-history"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" id="taa" value="<?= $row['title'] ?>"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted" value="<?= $row['date'] ?>"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-											<div class="text-truncate text-break" value="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" value="<?= $row['priority'] ?>"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary" value="<?= $row['type'] ?>"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
 										</div>
 									</div>
-								</a>
+								</button>
 							<?php
 							}
 							?>
@@ -119,20 +119,20 @@ include('scripts.php');
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
 							foreach ($inProgress as $key => $row) { ?>
-								<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
 											<i class="fa-solid d-flex fa-spinner fa-spin-pulse"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-											<div class="text-truncate text-break" title="<?= $row['description'] ?>">
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
 										</div>
 									</div>
 								</button>
@@ -156,20 +156,20 @@ include('scripts.php');
 						<div class="list-group list-group-flush" id="done">
 							<?php
 							foreach ($done as $key => $row) { ?>
-								<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
 											<i class="fa-solid d-flex bi bi-check-circle text-success"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-											<div class="text-truncate text-break" title="<?= $row['description'] ?>">
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
 										</div>
 									</div>
 								</button>
@@ -201,8 +201,8 @@ include('scripts.php');
 							<input type="text" class="form-control" name="title" id="title" placeholder="Title">
 							<label for="title">Title</label>
 						</div>
-						<input type="hidden" name="id">
-						<div class="mb-3">
+						<input type="hidden" name="id" id="id">
+						<div class=" mb-3">
 							<label class="form-label">Type</label>
 							<div class="form-check">
 								<input class="form-check-input" type="radio" name="type" id="bug" value="1" />
@@ -250,8 +250,8 @@ include('scripts.php');
 						</div>
 						<input type="hidden" id="id" value="" />
 						<div id="btn-update" style="display: none">
-							<button type="button" onclick="deleteTask()" id="deleteBtn" class="btn btn-danger">Delete</button>
-							<button type="button" onclick="updateTask()" id="updateBtn" class="btn btn-warning">Update</button>
+							<button type="submit" name="delete" onclick="deleteTask()" id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="submit" name="update" onclick="updateTask()" id="updateBtn" class="btn btn-warning">Update</button>
 						</div>
 					</div>
 				</div>
@@ -271,17 +271,9 @@ include('scripts.php');
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	<!-- JavaScript Sweet Alert 2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<!-- Import data from file JS -->
-	<script src="assets/js/data.js"></script>
 	<!-- Import Main file JS -->
-	<script src="assets/js/main.js"></script>
-	<script>
-		<?php
-		if (isset($_GET['id'])) {
-			echo '$("#myModalUpdate").modal("show");';
-		}
-		?>
-	</script>
+	<script src="assets/js/scripts.js"></script>
+
 	<!-- ================== END core-js ================== -->
 </body>
 

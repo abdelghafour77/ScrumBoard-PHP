@@ -66,11 +66,9 @@ include('scripts.php');
 			<div class="row" id="all-tasks">
 				<!-- TODO -->
 				<?php
-				$res = getTasks();
-				$counter_todo = 0;
-				$counter_inprogress = 0;
-				$counter_done = 0;
-
+				$toDo = getTasks('To Do');
+				$inProgress = getTasks('In Progress');
+				$done = getTasks('Done');
 				?>
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
@@ -78,39 +76,31 @@ include('scripts.php');
 							To Do (
 							<span id="count-todo">
 								<?php
-
-								foreach ($res as $row) {
-									if ($row['status'] == 'To Do') {
-										$counter_todo++;
-									}
-								}
-								echo $counter_todo;
+								echo mysqli_num_rows($toDo);
 								?>
 							</span>)
 						</div>
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
-							foreach ($res as $key => $row) {
-								if ($row['status'] == 'To Do') { ?>
-									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
-										<div class="row">
+							foreach ($toDo as $key => $row) { ?>
+								<a class="list-group-item card-color" href="index.php?id=<?= $row["id"] ?>">
+									<div class="row">
 
-											<div class="col-1 my-auto d-flex justify-content-center">
-												<i class="fa-solid d-flex bi bi-clock-history"></i>
-											</div>
-											<div class="col-11">
-												<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
-												<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-												<div class="text-truncate text-break" title="<?= $row['description'] ?>">
-													<?= $row['description'] ?>
-												</div>
-												<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
-												<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
-											</div>
+										<div class="col-1 my-auto d-flex justify-content-center">
+											<i class="fa-solid d-flex bi bi-clock-history"></i>
 										</div>
-									</button>
+										<div class="col-11">
+											<p class="fs-6 fw-semibold title m-0" id="taa" value="<?= $row['title'] ?>"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted" value="<?= $row['date'] ?>"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" value="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
+												<?= $row['description'] ?>
+											</div>
+											<span class="badge rounded-pill text-white blue-color" value="<?= $row['priority'] ?>"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary" value="<?= $row['type'] ?>"><?= $row['type'] ?></span>
+										</div>
+									</div>
+								</a>
 							<?php
-								}
 							}
 							?>
 						</div>
@@ -123,37 +113,31 @@ include('scripts.php');
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
 							In Progress (<span id="count-in-progress">
 								<?php
-								foreach ($res as $key => $row) {
-									if ($row['status'] == 'In Progress') {
-										$counter_inprogress++;
-									}
-								}
-								echo $counter_inprogress;
+								echo mysqli_num_rows($inProgress);
 								?>
 							</span>)</div>
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
-							foreach ($res as $key => $row) {
-								if ($row['status'] == 'In Progress') { ?>
-									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
-										<div class="row">
+							foreach ($inProgress as $key => $row) { ?>
+								<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
+									<div class="row">
 
-											<div class="col-1 my-auto d-flex justify-content-center">
-												<i class="fa-solid d-flex fa-spinner fa-spin-pulse"></i>
-											</div>
-											<div class="col-11">
-												<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
-												<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-												<div class="text-truncate text-break" title="<?= $row['description'] ?>">
-													<?= $row['description'] ?>
-												</div>
-												<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
-												<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
-											</div>
+										<div class="col-1 my-auto d-flex justify-content-center">
+											<i class="fa-solid d-flex fa-spinner fa-spin-pulse"></i>
 										</div>
-									</button>
+										<div class="col-11">
+											<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" title="<?= $row['description'] ?>">
+												<?= $row['description'] ?>
+											</div>
+											<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
+										</div>
+									</div>
+								</button>
 							<?php
-								}
+
 							}
 							?>
 						</div>
@@ -166,37 +150,30 @@ include('scripts.php');
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
 							Done (<span id="count-done">
 								<?php
-								foreach ($res as $row) {
-									if ($row['status'] == 'Done') {
-										$counter_done++;
-									}
-								}
-								echo $counter_done;
+								echo mysqli_num_rows($done);
 								?>
 							</span>)</div>
 						<div class="list-group list-group-flush" id="done">
 							<?php
-							foreach ($res as $row) {
-								if ($row['status'] == 'Done') { ?>
-									<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
-										<div class="row">
+							foreach ($done as $key => $row) { ?>
+								<button class="list-group-item card-color" data-bs-toggle="modal" data-bs-target="#myModal">
+									<div class="row">
 
-											<div class="col-1 my-auto d-flex justify-content-center">
-												<i class="fa-solid d-flex bi bi-check-circle text-success"></i>
-											</div>
-											<div class="col-11">
-												<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
-												<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
-												<div class="text-truncate text-break" title="<?= $row['description'] ?>">
-													<?= $row['description'] ?>
-												</div>
-												<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
-												<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
-											</div>
+										<div class="col-1 my-auto d-flex justify-content-center">
+											<i class="fa-solid d-flex bi bi-check-circle text-success"></i>
 										</div>
-									</button>
+										<div class="col-11">
+											<p class="fs-6 fw-semibold title m-0"><?= $row['title'] ?></p>
+											<small class="fw-light text-muted"><?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<div class="text-truncate text-break" title="<?= $row['description'] ?>">
+												<?= $row['description'] ?>
+											</div>
+											<span class="badge rounded-pill text-white blue-color"><?= $row['priority'] ?></span>
+											<span class="badge rounded-pill text-bg-secondary"><?= $row['type'] ?></span>
+										</div>
+									</div>
+								</button>
 							<?php
-								}
 							}
 							?>
 						</div>
@@ -224,6 +201,7 @@ include('scripts.php');
 							<input type="text" class="form-control" name="title" id="title" placeholder="Title">
 							<label for="title">Title</label>
 						</div>
+						<input type="hidden" name="id">
 						<div class="mb-3">
 							<label class="form-label">Type</label>
 							<div class="form-check">

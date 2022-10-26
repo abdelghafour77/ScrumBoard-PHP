@@ -275,6 +275,13 @@ include('scripts.php');
 	<script src="assets/js/data.js"></script>
 	<!-- Import Main file JS -->
 	<script src="assets/js/main.js"></script>
+	<script>
+		<?php
+		if (isset($_GET['id'])) {
+			echo '$("#myModalUpdate").modal("show");';
+		}
+		?>
+	</script>
 	<!-- ================== END core-js ================== -->
 </body>
 

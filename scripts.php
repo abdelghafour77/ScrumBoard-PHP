@@ -34,8 +34,8 @@ function getTasks($status)
     and 
         ta.priority_id = p.id
     and 
-        s.name= '$status'
-       ";
+        s.name= '$status'";
+
     $res = $conn->query($sql);
     return $res;
 }

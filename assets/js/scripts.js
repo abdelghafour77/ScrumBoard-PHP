@@ -33,8 +33,8 @@ function addTask() {
       // Show add button from modal
       document.getElementById("btn-add").style.display = "block";
       document.getElementById('form').reset();
-
 }
+
 //  Button to top
 const toTop = document.querySelector("#to-top");
 window.onscroll = function () { scrollFunction() };

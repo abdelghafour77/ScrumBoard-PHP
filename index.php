@@ -43,7 +43,7 @@ include('scripts.php');
 						<li class="breadcrumb-item"><a href="#" class="text-decoration-none fw-bold title">Home</a></li>
 						<li class="breadcrumb-item active title" aria-current="page">Scrum Board</li>
 					</ol>
-					<button type="button" class="btn btn-secondary rounded-pill float-end btn-add-task" onclick="createTask()" data-bs-toggle="modal" data-bs-target="#myModal">
+					<button type="button" class="btn btn-secondary rounded-pill float-end btn-add-task" onclick="addTask()" data-bs-toggle="modal" data-bs-target="#myModal">
 						<i class="bi bi-plus"></i>
 						Add Task
 					</button>
@@ -250,8 +250,8 @@ include('scripts.php');
 						</div>
 						<input type="hidden" id="id" value="" />
 						<div id="btn-update" style="display: none">
-							<button type="submit" name="delete" onclick="deleteTask()" id="deleteBtn" class="btn btn-danger">Delete</button>
-							<button type="submit" name="update" onclick="updateTask()" id="updateBtn" class="btn btn-warning">Update</button>
+							<button type="submit" name="delete" id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="submit" name="update" id="updateBtn" class="btn btn-warning">Update</button>
 						</div>
 					</div>
 				</div>
@@ -271,6 +271,8 @@ include('scripts.php');
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 	<!-- JavaScript Sweet Alert 2 -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<!-- Validator form -->
+	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 	<!-- Import Main file JS -->
 	<script src="assets/js/scripts.js"></script>
 

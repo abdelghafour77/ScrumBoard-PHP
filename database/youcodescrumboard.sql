@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 26 oct. 2022 à 21:08
+-- Généré le : sam. 29 oct. 2022 à 21:59
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -16,6 +16,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de données : `youcodescrumboard`
 --
@@ -33,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `priorities` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `priorities`
@@ -80,23 +81,24 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `type_id` int NOT NULL,
   `priority_id` int NOT NULL,
   `status_id` int NOT NULL,
-  `task_datetime` date NOT NULL,
+  `task_datetime` timestamp NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `type_id` (`type_id`),
   KEY `priority_id` (`priority_id`),
   KEY `status_id` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `tasks`
 --
 
 INSERT INTO `tasks` (`id`, `title`, `type_id`, `priority_id`, `status_id`, `task_datetime`, `description`) VALUES
-(8, 'Keep all the updated requirements in one place', 2, 3, 1, '2022-10-08', 'There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly.'),
-(9, 'Consider creating an acceptance criteria list', 1, 4, 3, '2022-10-28', 'Descriptive requirements are very helpful when it comes to understanding the context of a problem, yet finally it is good to precisely specify what is expected. Thus the developer will not have to look for the actual requirements in a long, descriptive text but he will be able to easily get to the essence. One might find that sometimes — when acceptance criteria are well defined — there is little or no need for any additional information. Example:\r\n      a) User navigates to “/accounts” and clicks on red download CSV button\r\n      b) Popup appears with two buttons: “This year” and “Last year”\r\n      c) If user clicked on “Last year” download is initiated\r\n      d) CSV downloaded includes following columns…'),
-(10, 'Provide mockups', 1, 4, 2, '2022-10-27', 'A textual requirements description is essential in most cases, but an image is often worth more than a thousand words. Even a simple mockup can limit misunderstandings by a great factor. There are many apps out there that might be helpful here, like Balsamiq, InVision or Mockingbird, but manipulating screenshots of an existing app also works.'),
-(11, 'Provide examples, credentials, etc', 2, 3, 2, '2022-10-29', 'If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.');
+(8, 'Keep all the updated requirements in one place', 2, 3, 1, '2022-10-07 23:00:00', 'There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly.'),
+(10, 'Provide mockups', 1, 4, 1, '2022-10-26 23:00:00', 'A textual requirements description is essential in most cases, but an image is often worth more than a thousand words. Even a simple mockup can limit misunderstandings by a great factor. There are many apps out there that might be helpful here, like Balsamiq, InVision or Mockingbird, but manipulating screenshots of an existing app also works.'),
+(11, 'Provide examples, credentials, etc', 2, 3, 2, '2022-10-28 23:00:00', 'If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.'),
+(22, 'Amet quo Nam anim a', 1, 4, 3, '2015-05-10 23:00:00', 'Duis sint provident'),
+(26, 'Commodi velit velit ', 2, 3, 2, '2016-12-12 11:04:00', 'Quaerat ipsa id dol');
 
 -- --------------------------------------------------------
 

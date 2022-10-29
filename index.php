@@ -76,7 +76,9 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							To Do (<span id="count-todo"><?= mysqli_num_rows($toDo); ?></span>)
+							To Do (<span id="count-todo">
+								<?= mysqli_num_rows($toDo); ?>
+							</span>)
 						</div>
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
@@ -88,13 +90,22 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex bi bi-clock-history"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+												<?= $row['title'] ?>
+											</p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+												<?= $key + 1 ?> created in
+												<?= date('d-m-Y', strtotime($row['date'])) ?>
+											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+												<?= $row['priority'] ?>
+											</span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+												<?= $row['type'] ?>
+											</span>
 										</div>
 									</div>
 								</button>
@@ -109,7 +120,9 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							In Progress (<span id="count-in-progress"><?= mysqli_num_rows($inProgress); ?></span>)</div>
+							In Progress (<span id="count-in-progress">
+								<?= mysqli_num_rows($inProgress); ?>
+							</span>)</div>
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
 							foreach ($inProgress as $key => $row) { ?>
@@ -120,13 +133,22 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex fa-spinner fa-spin-pulse"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+												<?= $row['title'] ?>
+											</p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+												<?= $key + 1 ?> created in
+												<?= date('d-m-Y', strtotime($row['date'])) ?>
+											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+												<?= $row['priority'] ?>
+											</span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+												<?= $row['type'] ?>
+											</span>
 										</div>
 									</div>
 								</button>
@@ -141,7 +163,9 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							Done (<span id="count-done"><?= mysqli_num_rows($done); ?></span>)</div>
+							Done (<span id="count-done">
+								<?= mysqli_num_rows($done); ?>
+							</span>)</div>
 						<div class="list-group list-group-flush" id="done">
 							<?php
 							foreach ($done as $key => $row) { ?>
@@ -152,13 +176,22 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex bi bi-check-circle text-success"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>"><?= $row['title'] ?></p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#<?= $key + 1 ?> created in <?= $row['date'] ?></small>
+											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+												<?= $row['title'] ?>
+											</p>
+											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+												<?= $key + 1 ?> created in
+												<?= date('d-m-Y', strtotime($row['date'])) ?>
+											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>"><?= $row['priority'] ?></span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>"><?= $row['type'] ?></span>
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+												<?= $row['priority'] ?>
+											</span>
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+												<?= $row['type'] ?>
+											</span>
 										</div>
 									</div>
 								</button>
@@ -226,7 +259,7 @@ $statuses = getStatuses();
 							<label for="status" class="form-label">Status</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="date" name="date" class="form-control" id="date" aria-describedby="basic-addon3" />
+							<input type="datetime-local" name="date" class="form-control" id="date" aria-describedby="basic-addon3" />
 							<label for="date" class="form-label">Date</label>
 						</div>
 						<div class="form-floating mb-3">

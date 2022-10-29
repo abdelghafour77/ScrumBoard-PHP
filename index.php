@@ -61,16 +61,6 @@ $statuses = getStatuses();
 		</header>
 
 		<div id="content" class="app-content container-fluid">
-			<?php if (isset($_SESSION['message'])) : ?>
-				<div class="alert alert-success alert-dismissible fade show">
-					<strong>Success!</strong>
-					<?php
-					echo $_SESSION['message'];
-					unset($_SESSION['message']);
-					?>
-					<button type="button" class="btn-close" data-bs-dismiss="alert"></span>
-				</div>
-			<?php endif ?>
 			<div class="row" id="all-tasks">
 				<!-- TODO -->
 				<div class="col-md-4 col-sm-12 mb-3">
@@ -292,15 +282,36 @@ $statuses = getStatuses();
 
 	<!-- ================== BEGIN core-js ================== -->
 	<!-- Import JQuery file JS -->
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="assets/js/jquery.min.js"></script>
 	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 	<!-- JavaScript Sweet Alert 2 -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="assets/js/sweetalert.js"></script>
 	<!-- Validator form -->
-	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+	<script src="assets/js/just-validate.min.js"></script>
 	<!-- Import Main file JS -->
 	<script src="assets/js/scripts.js"></script>
+	<script>
+		<?php if (isset($_SESSION['message'])) { ?>
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 4000,
+				timerProgressBar: false,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
+
+			Toast.fire({
+				icon: 'success',
+				title: '<?= $_SESSION['message'] ?>'
+			})
+		<?php unset($_SESSION['message']);
+		} ?>
+	</script>
 
 	<!-- ================== END core-js ================== -->
 </body>

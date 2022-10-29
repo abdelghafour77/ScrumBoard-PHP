@@ -32,8 +32,12 @@ function addTask() {
 
       // Show add button from modal
       document.getElementById("btn-add").style.display = "block";
+      document.getElementById("id").value = '';
       document.getElementById('form').reset();
 }
+// function deleteTask() {
+//       document.getElementById("id").value = '';
+// }
 
 //  Button to top
 const toTop = document.querySelector("#to-top");
@@ -52,3 +56,37 @@ toTop.addEventListener("click", function () {
             behavior: "smooth"
       });
 })
+function setType(type) {
+      document.getElementById('type').setAttribute("name", type);
+}
+
+
+const validation = new JustValidate('#form');
+validation
+      .addField('#title', [{
+            rule: 'minLength',
+            value: 3,
+      },
+      {
+            rule: 'required',
+      },
+      {
+            rule: 'maxLength',
+            value: 255,
+      },
+      ])
+      .addField('#status', [{
+            rule: 'required',
+      },])
+      .addField('#priority', [{
+            rule: 'required',
+      },])
+      .addField('#date', [{
+            rule: 'required',
+      },])
+      .addField('#description', [{
+            rule: 'required',
+      },])
+      .onSuccess((event) => {
+            event.currentTarget.submit();
+      });

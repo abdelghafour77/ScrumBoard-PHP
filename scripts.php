@@ -1,9 +1,13 @@
 <?php
 //INCLUDE DATABASE FILE
 include('database.php');
+
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
 session_start();
-
+// if (isset($_POST['id'])) {
+//     var_dump($_POST);
+//     die();
+// }
 //ROUTING
 if (isset($_POST['save']))        saveTask();
 if (isset($_POST['update']))      updateTask();
@@ -43,6 +47,7 @@ function getTasks($status)
 function saveTask()
 {
     extract($_POST);
+
     global $conn;
     $sql = "INSERT INTO tasks (title, type_id, status_id, priority_id, task_datetime , description)
             values ('$title', '$type', '$status', '$priority', '$date','$description')";
@@ -67,6 +72,22 @@ function updateTask()
     header('location: index.php');
 }
 
+function getPriorities()
+{
+    global $conn;
+    $sql = "SELECT * from priorities";
+    $res = $conn->query($sql);
+    return $res;
+}
+
+function getStatuses()
+{
+    global $conn;
+    $sql = "SELECT * from statuses";
+    $res = $conn->query($sql);
+    return $res;
+}
+
 function deleteTask()
 {
     $id = $_POST['id'];
@@ -75,7 +96,7 @@ function deleteTask()
     $sql = "DELETE FROM `tasks` WHERE id=$id";
     $res = $conn->query($sql);
     if ($res) {
-        $_SESSION['message'] = "Task has been updated successfully !";
+        $_SESSION['message'] = "Task has been deleted successfully !";
     } else {
         $_SESSION['message'] = "Error!";
     }

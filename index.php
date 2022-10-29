@@ -1,5 +1,13 @@
 <?php
 include('scripts.php');
+
+$toDo = getTasks('To Do');
+$inProgress = getTasks('In Progress');
+$done = getTasks('Done');
+
+$priorities = getPriorities();
+$statuses = getStatuses();
+
 ?>
 
 <!DOCTYPE html>
@@ -65,20 +73,10 @@ include('scripts.php');
 			<?php endif ?>
 			<div class="row" id="all-tasks">
 				<!-- TODO -->
-				<?php
-				$toDo = getTasks('To Do');
-				$inProgress = getTasks('In Progress');
-				$done = getTasks('Done');
-				?>
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							To Do (
-							<span id="count-todo">
-								<?php
-								echo mysqli_num_rows($toDo);
-								?>
-							</span>)
+							To Do (<span id="count-todo"><?= mysqli_num_rows($toDo); ?></span>)
 						</div>
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
@@ -111,11 +109,7 @@ include('scripts.php');
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							In Progress (<span id="count-in-progress">
-								<?php
-								echo mysqli_num_rows($inProgress);
-								?>
-							</span>)</div>
+							In Progress (<span id="count-in-progress"><?= mysqli_num_rows($inProgress); ?></span>)</div>
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
 							foreach ($inProgress as $key => $row) { ?>
@@ -137,7 +131,6 @@ include('scripts.php');
 									</div>
 								</button>
 							<?php
-
 							}
 							?>
 						</div>
@@ -148,11 +141,7 @@ include('scripts.php');
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							Done (<span id="count-done">
-								<?php
-								echo mysqli_num_rows($done);
-								?>
-							</span>)</div>
+							Done (<span id="count-done"><?= mysqli_num_rows($done); ?></span>)</div>
 						<div class="list-group list-group-flush" id="done">
 							<?php
 							foreach ($done as $key => $row) { ?>
@@ -198,7 +187,7 @@ include('scripts.php');
 					<div class="modal-body">
 						<!-- start form -->
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" name="title" id="title" placeholder="Title">
+							<input type="text" class="form-control" name="title" id="title" placeholder="Title" value="">
 							<label for="title">Title</label>
 						</div>
 						<input type="hidden" name="id" id="id">
@@ -215,43 +204,47 @@ include('scripts.php');
 
 						</div>
 						<div class="form-floating mb-3">
-							<select class="form-select" name="priority" id="priority" aria-describedby="basic-addon3" required>
-								<option disabled selected>Selected</option>
-								<option value="1">Low</option>
-								<option value="2">Medium</option>
-								<option value="3">High</option>
-								<option value="4">Critical</option>
+							<select class="form-select" name="priority" id="priority" aria-describedby="basic-addon3">
+								<option disabled selected value="">Choose priority</option>
+								<?php
+								foreach ($priorities as $priority) {
+									echo '<option value="' . $priority["id"] . '">' . $priority["name"] . '</option>';
+								}
+								?>
 							</select>
 							<label for="priority" class="form-label">Priority</label>
 						</div>
 						<div class="form-floating mb-3">
-							<select class="form-select" name="status" id="status" aria-label="Status" aria-describedby="basic-addon3" required>
-								<option disabled selected>Selected</option>
-								<option value="1">To do</option>
-								<option value="2">In progress</option>
-								<option value="3">Done</option>
+							<select class="form-select" name="status" id="status" aria-label="Status" aria-describedby="basic-addon3">
+								<option disabled selected value="">Choose status</option>
+								<?php
+								foreach ($statuses as $status) {
+									echo '<option value="' . $status["id"] . '">' . $status["name"] . '</option>';
+								}
+								?>
 							</select>
 							<label for="status" class="form-label">Status</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="date" name="date" class="form-control" id="date" aria-describedby="basic-addon3" required />
+							<input type="date" name="date" class="form-control" id="date" aria-describedby="basic-addon3" />
 							<label for="date" class="form-label">Date</label>
 						</div>
 						<div class="form-floating mb-3">
 							<textarea class="form-control" name="description" id="description" rows="4" placeholder="Description" style="min-height: 90px;" required></textarea>
 							<label for="description" class="form-label">Description</label>
 						</div>
+						<input type="hidden" id="type" name="" value="">
 						<!-- end form -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 						<div id="btn-add">
-							<button type="submit" name="save" class="btn btn-primary btn-add-task">Add</button>
+							<button type="submit" name="save" onclick="setType('save')" class="btn btn-primary btn-add-task">Add</button>
 						</div>
 						<input type="hidden" id="id" value="" />
 						<div id="btn-update" style="display: none">
-							<button type="submit" name="delete" id="deleteBtn" class="btn btn-danger">Delete</button>
-							<button type="submit" name="update" id="updateBtn" class="btn btn-warning">Update</button>
+							<button type="submit" name="delete" onclick="setType('delete')" id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="submit" name="update" onclick="setType('update')" id="updateBtn" class="btn btn-warning">Update</button>
 						</div>
 					</div>
 				</div>

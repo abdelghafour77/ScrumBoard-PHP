@@ -4,10 +4,7 @@ include('database.php');
 
 //SESSSION IS A WAY TO STORE DATA TO BE USED ACROSS MULTIPLE PAGES
 session_start();
-// if (isset($_POST['id'])) {
-//     var_dump($_POST);
-//     die();
-// }
+
 //ROUTING
 if (isset($_POST['save']))        saveTask();
 if (isset($_POST['update']))      updateTask();
@@ -53,9 +50,13 @@ function saveTask()
             values ('$title', '$type', '$status', '$priority', '$date','$description')";
     $res = $conn->query($sql);
     if ($res) {
+        $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been added successfully !";
-        header('location: index.php');
+    } else {
+        $_SESSION['type_message'] = "error";
+        $_SESSION['message'] = "Error in insert to database !";
     }
+    header('location: index.php');
 }
 
 function updateTask()
@@ -65,9 +66,11 @@ function updateTask()
     $sql = "UPDATE tasks SET title ='$title',type_id=$type, priority_id=$priority,status_id=$status,task_datetime='$date',description='$description' WHERE id=$id";
     $res = $conn->query($sql);
     if ($res) {
+        $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been updated successfully !";
     } else {
-        $_SESSION['message'] = "Error!";
+        $_SESSION['type_message'] = "error";
+        $_SESSION['message'] = "Error in update from database !";
     }
     header('location: index.php');
 }
@@ -96,9 +99,11 @@ function deleteTask()
     $sql = "DELETE FROM `tasks` WHERE id=$id";
     $res = $conn->query($sql);
     if ($res) {
+        $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been deleted successfully !";
     } else {
-        $_SESSION['message'] = "Error!";
+        $_SESSION['type_message'] = "error";
+        $_SESSION['message'] = "Error in delete !";
     }
     header('location: index.php');
 }

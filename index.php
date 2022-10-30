@@ -28,7 +28,7 @@ $statuses = getStatuses();
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.1/sweetalert2.min.css" integrity="sha512-y6TjkITSFkRB9mZmDaJyDOsyHsYvOo3Np3iAKe02HgMDP4L4vbmbhlzNpbbIVC1x+GUUHvepTd1BKDe4kC6kNg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="assets/css/style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="assets/css/style.css" />
 	<!-- ================== END core-css ================== -->
 </head>
 
@@ -80,7 +80,7 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex bi bi-clock-history"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
 											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
@@ -123,7 +123,7 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex fa-spinner fa-spin-pulse"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
 											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
@@ -166,7 +166,7 @@ $statuses = getStatuses();
 											<i class="fa-solid d-flex bi bi-check-circle text-success"></i>
 										</div>
 										<div class="col-11">
-											<p class="fs-6 fw-semibold title m-0" data="<?= $row['title'] ?>">
+											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
 											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
@@ -294,6 +294,7 @@ $statuses = getStatuses();
 	<script>
 		<?php if (isset($_SESSION['message'])) { ?>
 			const Toast = Swal.mixin({
+				width: '25em',
 				toast: true,
 				position: 'top-end',
 				showConfirmButton: false,
@@ -306,13 +307,14 @@ $statuses = getStatuses();
 			})
 
 			Toast.fire({
-				icon: 'success',
+				icon: '<?= $_SESSION['type_message'] ?>',
 				title: '<?= $_SESSION['message'] ?>'
 			})
-		<?php unset($_SESSION['message']);
+		<?php
+			unset($_SESSION['type_message']);
+			unset($_SESSION['message']);
 		} ?>
 	</script>
-
 	<!-- ================== END core-js ================== -->
 </body>
 

@@ -6,9 +6,9 @@ $db = "youcodescrumboard";
 $username = "root";
 $password = "";
 
-$conn = new mysqli($servername, $username, $password, $db);
+$conn = mysqli_connect($servername, $username, $password, $db);
 
-if ($conn->connect_errno) {
-    echo "Failed to connect to MySQL: " . $conn->connect_error;
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
     exit();
 }

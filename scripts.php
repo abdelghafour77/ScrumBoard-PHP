@@ -37,7 +37,7 @@ function getTasks($status)
     and 
         s.name= '$status'";
 
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     return $res;
 }
 
@@ -48,7 +48,7 @@ function saveTask()
     global $conn;
     $sql = "INSERT INTO tasks (title, type_id, status_id, priority_id, task_datetime , description)
             values ('$title', '$type', '$status', '$priority', '$date','$description')";
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     if ($res) {
         $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been added successfully !";
@@ -64,7 +64,7 @@ function updateTask()
     extract($_POST);
     global $conn;
     $sql = "UPDATE tasks SET title ='$title',type_id=$type, priority_id=$priority,status_id=$status,task_datetime='$date',description='$description' WHERE id=$id";
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     if ($res) {
         $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been updated successfully !";
@@ -79,7 +79,7 @@ function getPriorities()
 {
     global $conn;
     $sql = "SELECT * from priorities";
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     return $res;
 }
 
@@ -87,7 +87,7 @@ function getStatuses()
 {
     global $conn;
     $sql = "SELECT * from statuses";
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     return $res;
 }
 
@@ -97,7 +97,7 @@ function deleteTask()
 
     global $conn;
     $sql = "DELETE FROM `tasks` WHERE id=$id";
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     if ($res) {
         $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been deleted successfully !";

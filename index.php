@@ -66,9 +66,7 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							To Do (<span id="count-todo">
-								<?= mysqli_num_rows($toDo); ?>
-							</span>)
+							To Do (<span id="count-todo"><?= mysqli_num_rows($toDo); ?></span>)
 						</div>
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
@@ -110,9 +108,8 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							In Progress (<span id="count-in-progress">
-								<?= mysqli_num_rows($inProgress); ?>
-							</span>)</div>
+							In Progress (<span id="count-in-progress"><?= mysqli_num_rows($inProgress); ?></span>)
+						</div>
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
 							foreach ($inProgress as $key => $row) { ?>
@@ -153,9 +150,8 @@ $statuses = getStatuses();
 				<div class="col-md-4 col-sm-12 mb-3">
 					<div class="card">
 						<div class="card-header text-center header-color text-white bg-dark fw-bold list-header-color">
-							Done (<span id="count-done">
-								<?= mysqli_num_rows($done); ?>
-							</span>)</div>
+							Done (<span id="count-done"><?= mysqli_num_rows($done); ?></span>)
+						</div>
 						<div class="list-group list-group-flush" id="done">
 							<?php
 							foreach ($done as $key => $row) { ?>

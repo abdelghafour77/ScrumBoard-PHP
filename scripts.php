@@ -17,11 +17,12 @@ function getTasks($status)
         ta.id as id ,
         ta.title as title ,
         ty.name as type,
+        ty.id as type_id,
         s.name as status,
-        s.id as id_status,
+        s.id as status_id,
         p.name as priority,
-        p.id as id_priority,
-        ta.task_datetime as date,
+        p.id as priority_id,
+        ta.task_datetime as task_datetime,
         ta.description as description
     FROM
         tasks as ta ,
@@ -36,6 +37,19 @@ function getTasks($status)
         ta.priority_id = p.id
     and 
         s.name= '$status'";
+
+    // $sql = "SELECT tasks.*,
+    //     statuses.name as status ,
+    //     priorities.name as priority ,
+    //     types.name as type 
+    // FROM 
+    //     tasks 
+    // inner join priorities on tasks.priority_id = priorities.id
+    // inner join statuses on tasks.status_id = statuses.id 
+    // inner join types on tasks.type_id = types.id
+    // where statuses.name='$status';
+    //         ";
+
 
     $res = mysqli_query($conn, $sql);
     return $res;

@@ -71,7 +71,7 @@ $statuses = getStatuses();
 						<div class="list-group list-group-flush" id="toDo">
 							<?php
 							foreach ($toDo as $key => $row) { ?>
-								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['status_id'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
@@ -81,17 +81,17 @@ $statuses = getStatuses();
 											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+											<small class="fw-light text-muted" data="<?= $row['task_datetime'] ?>">#
 												<?= $key + 1 ?> created in
-												<?= date('d-m-Y', strtotime($row['date'])) ?>
+												<?= date('d-m-Y', strtotime($row['task_datetime'])) ?>
 											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['priority_id'] ?>">
 												<?= $row['priority'] ?>
 											</span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type_id'] ?>">
 												<?= $row['type'] ?>
 											</span>
 										</div>
@@ -113,7 +113,7 @@ $statuses = getStatuses();
 						<div class="list-group list-group-flush" id="inProgress">
 							<?php
 							foreach ($inProgress as $key => $row) { ?>
-								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['status_id'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
@@ -123,17 +123,17 @@ $statuses = getStatuses();
 											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+											<small class="fw-light text-muted" data="<?= $row['task_datetime'] ?>">#
 												<?= $key + 1 ?> created in
-												<?= date('d-m-Y', strtotime($row['date'])) ?>
+												<?= date('d-m-Y', strtotime($row['task_datetime'])) ?>
 											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['priority_id'] ?>">
 												<?= $row['priority'] ?>
 											</span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type_id'] ?>">
 												<?= $row['type'] ?>
 											</span>
 										</div>
@@ -155,7 +155,7 @@ $statuses = getStatuses();
 						<div class="list-group list-group-flush" id="done">
 							<?php
 							foreach ($done as $key => $row) { ?>
-								<button type="button" class="list-group-item card-color" data-status="<?= $row['id_status'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
+								<button type="button" class="list-group-item card-color" data-status="<?= $row['status_id'] ?>" data-id="<?= $row['id'] ?>" id="<?= $row['id'] ?>" onclick="getTask(<?= $row['id'] ?>)">
 									<div class="row">
 
 										<div class="col-1 my-auto d-flex justify-content-center">
@@ -165,17 +165,17 @@ $statuses = getStatuses();
 											<p class="fs-6 fw-semibold text-truncate title m-0" data="<?= $row['title'] ?>" title="<?= $row['title'] ?>">
 												<?= $row['title'] ?>
 											</p>
-											<small class="fw-light text-muted" data="<?= $row['date'] ?>">#
+											<small class="fw-light text-muted" data="<?= $row['task_datetime'] ?>">#
 												<?= $key + 1 ?> created in
-												<?= date('d-m-Y', strtotime($row['date'])) ?>
+												<?= date('d-m-Y', strtotime($row['task_datetime'])) ?>
 											</small>
 											<div class="text-truncate text-break" data="<?= $row['description'] ?>" title="<?= $row['description'] ?>">
 												<?= $row['description'] ?>
 											</div>
-											<span class="badge rounded-pill text-white blue-color" data="<?= $row['id_priority'] ?>">
+											<span class="badge rounded-pill text-white blue-color" data="<?= $row['priority_id'] ?>">
 												<?= $row['priority'] ?>
 											</span>
-											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type'] ?>">
+											<span class="badge rounded-pill text-bg-secondary" data="<?= $row['type_id'] ?>">
 												<?= $row['type'] ?>
 											</span>
 										</div>
@@ -249,7 +249,8 @@ $statuses = getStatuses();
 							<label for="date" class="form-label">Date</label>
 						</div>
 						<div class="form-floating mb-3">
-							<textarea class="form-control" name="description" id="description" rows="4" placeholder="Description" style="min-height: 90px;" required></textarea>
+							<textarea class="form-control" name="description" id="description" rows="4" placeholder="Description" style="min-height: 90px;">
+							</textarea>
 							<label for="description" class="form-label">Description</label>
 						</div>
 						<input type="hidden" id="type" name="" value="">
@@ -284,7 +285,7 @@ $statuses = getStatuses();
 	<!-- JavaScript Sweet Alert 2 -->
 	<script src="assets/js/sweetalert.js"></script>
 	<!-- Validator form -->
-	<script src="assets/js/just-validate.min.js"></script>
+	<script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 	<!-- Import Main file JS -->
 	<script src="assets/js/scripts.js"></script>
 	<script>

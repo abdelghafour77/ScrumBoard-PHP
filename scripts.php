@@ -13,42 +13,42 @@ if (isset($_POST['delete']))      deleteTask();
 function getTasks($status)
 {
     global $conn;
-    $sql = "SELECT
-        ta.id as id ,
-        ta.title as title ,
-        ty.name as type,
-        ty.id as type_id,
-        s.name as status,
-        s.id as status_id,
-        p.name as priority,
-        p.id as priority_id,
-        ta.task_datetime as task_datetime,
-        ta.description as description
-    FROM
-        tasks as ta ,
-        priorities as p ,
-        statuses as s ,
-        types as ty
-    WHERE
-        ta.type_id = ty.id
-    and 
-        ta.status_id = s.id
-    and 
-        ta.priority_id = p.id
-    and 
-        s.name= '$status'";
+    // $sql = "SELECT
+    //     ta.id as id ,
+    //     ta.title as title ,
+    //     ty.name as type,
+    //     ty.id as type_id,
+    //     s.name as status,
+    //     s.id as status_id,
+    //     p.name as priority,
+    //     p.id as priority_id,
+    //     ta.task_datetime as task_datetime,
+    //     ta.description as description
+    // FROM
+    //     tasks as ta ,
+    //     priorities as p ,
+    //     statuses as s ,
+    //     types as ty
+    // WHERE
+    //     ta.type_id = ty.id
+    // and 
+    //     ta.status_id = s.id
+    // and 
+    //     ta.priority_id = p.id
+    // and 
+    //     s.name= '$status'";
 
-    // $sql = "SELECT tasks.*,
-    //     statuses.name as status ,
-    //     priorities.name as priority ,
-    //     types.name as type 
-    // FROM 
-    //     tasks 
-    // inner join priorities on tasks.priority_id = priorities.id
-    // inner join statuses on tasks.status_id = statuses.id 
-    // inner join types on tasks.type_id = types.id
-    // where statuses.name='$status';
-    //         ";
+    $sql = "SELECT tasks.*,
+        statuses.name as status ,
+        priorities.name as priority ,
+        types.name as type 
+    FROM 
+        tasks 
+    inner join priorities on tasks.priority_id = priorities.id
+    inner join statuses on tasks.status_id = statuses.id 
+    inner join types on tasks.type_id = types.id
+    where statuses.name='$status';
+            ";
 
 
     $res = mysqli_query($conn, $sql);

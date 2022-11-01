@@ -263,7 +263,7 @@ $statuses = getStatuses();
 						</div>
 						<input type="hidden" id="id" value="" />
 						<div id="btn-update" style="display: none">
-							<button type="submit" name="delete" onclick="setType('delete')" id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="submit" name="delete" onclick="setType('delete'), delteValidation()" id="deleteBtn" class="btn btn-danger">Delete</button>
 							<button type="submit" name="update" onclick="setType('update')" id="updateBtn" class="btn btn-warning">Update</button>
 						</div>
 					</div>

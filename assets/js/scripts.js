@@ -66,26 +66,43 @@ validation
       .addField('#title', [{
             rule: 'minLength',
             value: 3,
+            errorMessage: 'Title is too short !',
       },
       {
             rule: 'required',
+            errorMessage: 'Title required !',
+
       },
       {
             rule: 'maxLength',
             value: 255,
+            errorMessage: 'title is too long !',
+
       },
+            // {
+            //       rule: 'customRegexp',
+            //       value: /([A-z\s])/gi,
+            // },
       ])
-      .addField('#status', [{
-            rule: 'required',
-      },])
       .addField('#priority', [{
             rule: 'required',
+            errorMessage: 'Priority required !',
+
+      },])
+      .addField('#status', [{
+            rule: 'required',
+            errorMessage: 'Status required !',
+
       },])
       .addField('#date', [{
             rule: 'required',
+            errorMessage: 'Date required !',
+
       },])
       .addField('#description', [{
             rule: 'required',
+            errorMessage: 'Description required !',
+
       },])
       .onSuccess((event) => {
             event.currentTarget.submit();

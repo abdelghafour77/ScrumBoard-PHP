@@ -59,16 +59,25 @@ function saveTask()
 {
     extract($_POST);
 
-    global $conn;
-    $sql = "INSERT INTO tasks (title, type_id, status_id, priority_id, task_datetime , description)
-            values ('$title', '$type', '$status', '$priority', '$date','$description')";
-    $res = mysqli_query($conn, $sql);
-    if ($res) {
-        $_SESSION['type_message'] = "success";
-        $_SESSION['message'] = "Task has been added successfully !";
-    } else {
+    if (empty($title) || empty($type) || empty($status) || empty($priority) || empty($date) || empty($description)) {
         $_SESSION['type_message'] = "error";
-        $_SESSION['message'] = "Error in insert to database !";
+        $_SESSION['message'] = "One or some inputs are empty";
+    } else {
+
+        global $conn;
+        $sql = "INSERT INTO tasks (title, type_id, status_id, priority_id, task_datetime , description)
+            values (?,?,?,?,?,?)";
+        $statement = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($statement, 'ssssss', $title, $type, $status, $priority, $date, $description);
+        $res = mysqli_stmt_execute($statement);
+
+        if ($res) {
+            $_SESSION['type_message'] = "success";
+            $_SESSION['message'] = "Task has been added successfully !";
+        } else {
+            $_SESSION['type_message'] = "error";
+            $_SESSION['message'] = "Error in insert to database !";
+        }
     }
     header('location: index.php');
 }
@@ -77,8 +86,10 @@ function updateTask()
 {
     extract($_POST);
     global $conn;
-    $sql = "UPDATE tasks SET title ='$title',type_id=$type, priority_id=$priority,status_id=$status,task_datetime='$date',description='$description' WHERE id=$id";
-    $res = mysqli_query($conn, $sql);
+    $sql = "UPDATE tasks SET title =? ,type_id=? ,status_id=? ,priority_id=? ,task_datetime=? ,description=? WHERE id=?";
+    $statement = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($statement, 'sssssss', $title, $type, $status, $priority, $date, $description, $id);
+    $res = mysqli_stmt_execute($statement);
     if ($res) {
         $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been updated successfully !";
@@ -110,8 +121,10 @@ function deleteTask()
     $id = $_POST['id'];
 
     global $conn;
-    $sql = "DELETE FROM `tasks` WHERE id=$id";
-    $res = mysqli_query($conn, $sql);
+    $sql = "DELETE FROM tasks WHERE id=?";
+    $statement = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($statement, 's', $id);
+    $res = mysqli_stmt_execute($statement);
     if ($res) {
         $_SESSION['type_message'] = "success";
         $_SESSION['message'] = "Task has been deleted successfully !";

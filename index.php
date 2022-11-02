@@ -42,11 +42,11 @@ $statuses = getStatuses();
 					<a class="navbar-brand" href="#">
 						<h3 class="fw-bold text-white logo">S.board</h3>
 					</a>
-					<div class="d-flex">
+					<!-- <div class="d-flex">
 						<button type="button" class="btn btn-secondary rounded-pill float-end btn-add-task" data-bs-toggle="modal" data-bs-target="#login">
 							Log In
 						</button>
-					</div>
+					</div> -->
 				</div>
 			</nav>
 
@@ -198,36 +198,6 @@ $statuses = getStatuses();
 		<!-- END #content -->
 	</div>
 	<!-- END #app -->
-	<!-- START Modal Login -->
-	<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<form id="login" method="POST" action="" autocomplete="off">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">Log In</h1>
-						<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<!-- start form -->
-						<div class="form-floating mb-3">
-							<input type="email" class="form-control" name="email" id="email" placeholder="Email" autocomplete="off">
-							<label for="email">Email</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="password" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off">
-							<label for="password">Password</label>
-						</div>
-						<!-- end form -->
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="submit" name="save" class="btn btn-primary btn-add-task">Connect</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	<!-- END Modal Login -->
 	<!-- Modal task -->
 	<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">

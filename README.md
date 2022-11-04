@@ -1,4 +1,4 @@
-# YouCode Scrum Board Project
+# Scrum Board Project
 
 L'objectif est de développer une application web YouCode Scrum Board en bootstrap et de le rendre aussi proche que possible de la conception proposée.
 
